@@ -1,0 +1,10 @@
+body {
+    background: url(./img/background.jpg) no-repeat, linear-gradient(#7d021e, #f54039);;
+    background-size: cover;
+}
+
+button:focus { outline: none; }
+
+menu {
+    padding-top: 4%;
+}

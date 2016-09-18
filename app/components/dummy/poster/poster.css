@@ -1,0 +1,84 @@
+
+div {
+    margin: 0 20px 150px 20px;
+    display: inline;
+    float: left;
+    perspective: 500px;
+    -webkit-perspective: 500px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition-property: perspective;
+    -webkit-transition-duration: 0.5s;
+}
+
+div:hover {
+    perspective: 5000px;
+    -webkit-perspective: 5000px;
+}
+
+div img {
+    width: 300px;
+    height: 450px;
+    border: 10px solid #fcfafa;
+    -webkit-transform: rotateY(30deg);
+    -moz-box-shadow: 0 3px 10px #030207;
+    -webkit-box-shadow: 0 3px 10px #030207;
+    -webkit-transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+}
+
+div:hover img {
+    -webkit-transform: rotateY(0deg);
+}
+
+.movieinfo {
+    border: 10px solid #fcfafa;
+    padding: 20px;
+    width: 200px;
+    height: 180px;
+    background-color: #930420;
+    margin: -195px 0 0 55px;
+    position: absolute;
+    -moz-box-shadow: 0 20px 40px #030207;
+    -webkit-box-shadow: 0 20px 40px #030207;
+    -webkit-transform: translateZ(30px) rotateY(30deg);
+    -webkit-transition-property: transform, box-shadow, margin;
+    -webkit-transition-duration: 0.5s;
+}
+
+
+div:hover .movieinfo {
+    -webkit-transform: rotateY(0deg);
+    -webkit-box-shadow: 0 5px 10px #030207;
+    margin: -175px 0 0 30px;
+}
+
+
+.movieinfo h3 {
+    color: #fffaef;
+    font-variant: small-caps;
+    font-family: Georgia, serif, Times;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.movieinfo p {
+    padding-bottom: 15px;
+}
+
+.movieinfo a {
+    background-color: #561d19;
+    padding: 5px 10px;
+    color: #eee;
+    text-decoration: none;
+    display: block;
+    width: 80px;
+    text-align: center;
+    margin: 0 auto;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.movieinfo a:hover, .movieinfo a:focus {
+    background-color: #6a191f;
+    color: #fff;
+}
