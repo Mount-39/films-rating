@@ -9,10 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var top20_store_1 = require("./top20.store");
 var Top20 = (function () {
-    function Top20() {
+    function Top20(top20Store) {
+        this.top20Store = top20Store;
+        top20Store.films.subscribe(function (f) { return console.log(f); });
     }
     Top20.prototype.ngOnInit = function () {
+        this.top20Store.loadFilms();
     };
     Top20 = __decorate([
         core_1.Component({
@@ -20,7 +24,7 @@ var Top20 = (function () {
             styleUrls: ['app/pages/top20/top20.css'],
             template: "\n<div>\n    <div class=\"posters\">\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n    </div>\n</div>\n"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [top20_store_1.Top20Store])
     ], Top20);
     return Top20;
 }());

@@ -17,13 +17,18 @@ var top20_page_1 = require("./top20/top20.page");
 var favorite_page_1 = require("./favorite/favorite.page");
 var byDecade_page_1 = require("./byDecade/byDecade.page");
 var poster_1 = require("../components/dummy/poster/poster");
+var urlBuilder_service_1 = require("../services/urlBuilder.service");
+var dataStorage_service_1 = require("../services/dataStorage.service");
+var top20_store_1 = require("./top20/top20.store");
+var backend_service_1 = require("../services/backend.service");
+var errorHandler_1 = require("../services/errorHandler");
 var SharedModule = (function () {
     function SharedModule() {
     }
     SharedModule.forRoot = function () {
         return {
             ngModule: SharedModule,
-            providers: []
+            providers: [backend_service_1.BackendService, errorHandler_1.ErrorHandler, urlBuilder_service_1.UrlBuilderService, dataStorage_service_1.DataStorage, top20_store_1.Top20Store]
         };
     };
     SharedModule = __decorate([

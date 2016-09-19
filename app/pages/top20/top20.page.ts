@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Top20Store} from "./top20.store";
 
 @Component({
     selector: 'top-20',
@@ -16,7 +17,11 @@ import {Component, OnInit} from '@angular/core';
 `
 })
 export class Top20 implements OnInit{
-    ngOnInit() {
+    constructor(private top20Store:Top20Store) {
+        top20Store.films.subscribe((f:any) => console.log(f));
+    }
 
+    ngOnInit() {
+        this.top20Store.loadFilms()
     }
 }
