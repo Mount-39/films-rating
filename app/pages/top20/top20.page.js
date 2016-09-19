@@ -12,11 +12,19 @@ var core_1 = require('@angular/core');
 var top20_store_1 = require("./top20.store");
 var Top20 = (function () {
     function Top20(top20Store) {
+        var _this = this;
         this.top20Store = top20Store;
-        top20Store.films.subscribe(function (f) { return console.log(f); });
+        this.subscriber = top20Store.films.subscribe(function (films) {
+            console.log(films);
+            _this.films = films;
+        });
     }
     Top20.prototype.ngOnInit = function () {
-        this.top20Store.loadFilms();
+        if (this.films.length === 0)
+            this.top20Store.loadFilms();
+    };
+    Top20.prototype.ngOnDestroy = function () {
+        this.subscriber.unsubscribe();
     };
     Top20 = __decorate([
         core_1.Component({

@@ -9,6 +9,6 @@ import {Component} from '@angular/core';
 </div>
 `
 })
-export class Favorite{
+export class Favorite {
 
 }

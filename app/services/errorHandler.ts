@@ -10,7 +10,8 @@ export class ErrorHandler {
             returnedMessage:string;
 
         if(errMsg.code)
-            returnedMessage = `Error! Status: ${errMsg.code}. Message: ${errMsg.message || 'Something wrong with request to server. Please check url!'}`;
+            returnedMessage = `Error! Status: ${errMsg.code}. Message: ${errMsg.message || 
+            'Something wrong with request to server. Please check url!'}`;
         else
             returnedMessage = `Error : ${errMsg}`;
 

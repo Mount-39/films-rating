@@ -33,10 +33,9 @@ var SharedModule = (function () {
     };
     SharedModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule,],
+            imports: [common_1.CommonModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
             declarations: [button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster],
-            exports: [common_1.CommonModule, forms_1.FormsModule, button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite,
-                byDecade_page_1.ByDecade, poster_1.Poster]
+            exports: [common_1.CommonModule, forms_1.FormsModule, button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster]
         }), 
         __metadata('design:paramtypes', [])
     ], SharedModule);

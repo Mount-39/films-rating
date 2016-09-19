@@ -16,10 +16,9 @@ import {ErrorHandler} from "../services/errorHandler";
 
 
 @NgModule({
-    imports:      [ CommonModule, FormsModule, HttpModule, JsonpModule,],
+    imports:      [ CommonModule, FormsModule, HttpModule, JsonpModule ],
     declarations: [ Btn, Top20, Favorite, ByDecade, Poster ],
-    exports:      [ CommonModule, FormsModule, Btn, Top20, Favorite,
-        ByDecade, Poster ]
+    exports:      [ CommonModule, FormsModule, Btn, Top20, Favorite, ByDecade, Poster ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

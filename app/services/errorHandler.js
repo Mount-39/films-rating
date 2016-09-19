@@ -15,7 +15,8 @@ var ErrorHandler = (function () {
     ErrorHandler.prototype.handleError = function (serverResponse) {
         var errMsg = serverResponse.error ? serverResponse.error : serverResponse, returnedMessage;
         if (errMsg.code)
-            returnedMessage = "Error! Status: " + errMsg.code + ". Message: " + (errMsg.message || 'Something wrong with request to server. Please check url!');
+            returnedMessage = "Error! Status: " + errMsg.code + ". Message: " + (errMsg.message ||
+                'Something wrong with request to server. Please check url!');
         else
             returnedMessage = "Error : " + errMsg;
         return new Error(returnedMessage);

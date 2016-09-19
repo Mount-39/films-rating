@@ -17,11 +17,24 @@ import {Top20Store} from "./top20.store";
 `
 })
 export class Top20 implements OnInit{
+    private films:Array<any>;
+    private subscriber:any;
+
     constructor(private top20Store:Top20Store) {
-        top20Store.films.subscribe((f:any) => console.log(f));
+         this.subscriber = top20Store.films.subscribe((films:Array<any>) => {
+            console.log(films);
+            this.films = films;
+        });
     }
 
     ngOnInit() {
-        this.top20Store.loadFilms()
+        if (this.films.length === 0)
+            this.top20Store.loadFilms()
     }
+
+    ngOnDestroy(){
+        this.subscriber.unsubscribe();
+    }
+
+
 }

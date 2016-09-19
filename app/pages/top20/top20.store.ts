@@ -11,7 +11,7 @@ export class Top20Store {
 
     private _films: BehaviorSubject<List<Top20Model>> = new BehaviorSubject(List([]));
 
-    constructor (private request: UrlBuilderService,
+    constructor (private request: UrlBuilderService
                  // private dataStorage: DataStorage
     ) { }
 

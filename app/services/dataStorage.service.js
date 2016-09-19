@@ -9,9 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var immutable_1 = require("immutable");
 var DataStorage = (function () {
     function DataStorage() {
+        this._films = immutable_1.List([]);
     }
+    Object.defineProperty(DataStorage.prototype, "films", {
+        set: function (collection) {
+            this._films = immutable_1.List(collection);
+        },
+        enumerable: true,
+        configurable: true
+    });
     DataStorage = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
