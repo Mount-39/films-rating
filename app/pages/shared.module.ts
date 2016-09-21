@@ -9,10 +9,9 @@ import {Favorite} from "./favorite/favorite.page";
 import {ByDecade} from "./byDecade/byDecade.page";
 import {Poster} from "../components/dummy/poster/poster";
 import {UrlBuilderService} from "../services/urlBuilder.service";
-import {DataStorage} from "../services/dataStorage.service";
-import {Top20Store} from "./top20/top20.store";
 import {BackendService} from "../services/backend.service";
 import {ErrorHandler} from "../services/errorHandler";
+import {DataStorage} from "../services/dataStorage.service";
 
 
 @NgModule({
@@ -24,7 +23,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ BackendService, ErrorHandler, UrlBuilderService, DataStorage, Top20Store ]
+            providers: [ BackendService, ErrorHandler, UrlBuilderService, DataStorage ]
         };
     }
 }

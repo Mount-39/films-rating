@@ -9,30 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var top20_store_1 = require("./top20.store");
+var dataStorage_service_1 = require("../../services/dataStorage.service");
 var Top20 = (function () {
-    function Top20(top20Store) {
+    function Top20(store) {
         var _this = this;
-        this.top20Store = top20Store;
-        this.subscriber = top20Store.films.subscribe(function (films) {
-            console.log(films);
+        this.store = store;
+        this.subscriber = store.films.subscribe(function (films) {
+            console.log("HEY", films);
             _this.films = films;
         });
     }
     Top20.prototype.ngOnInit = function () {
-        if (this.films.length === 0)
-            this.top20Store.loadFilms();
+        if (this.films.size === 0)
+            this.store.loadFilms();
     };
     Top20.prototype.ngOnDestroy = function () {
         this.subscriber.unsubscribe();
+    };
+    Top20.prototype.favorite = function (movie) {
+        this.store.favorites = movie;
     };
     Top20 = __decorate([
         core_1.Component({
             selector: 'top-20',
             styleUrls: ['app/pages/top20/top20.css'],
-            template: "\n<div>\n    <div class=\"posters\">\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n        <poster></poster>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <div class=\"posters animated zoomIn\">\n        <poster *ngFor=\"let film of films\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
         }), 
-        __metadata('design:paramtypes', [top20_store_1.Top20Store])
+        __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Top20);
     return Top20;
 }());

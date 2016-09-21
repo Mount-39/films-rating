@@ -30,6 +30,31 @@ div:hover img {
     -webkit-transform: rotateY(0deg);
 }
 
+.favorite {
+    position: absolute;
+    top: -36px;
+    left: -26px;
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-size: 80px 80px;
+    background-color: #8a877d;
+
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    -webkit-mask-image: url(app/assets/img/star.svg);
+    mask-image: url(app/assets/img/star.svg);
+}
+
+.favorite .active {
+    background-color: #ffe96a;
+}
+
+.movieinfo .favorite:hover, .movieinfo span:focus {
+    background-color: #fffe6a;
+    cursor: pointer;
+}
+
 .movieinfo {
     border: 10px solid #fcfafa;
     padding: 20px;
@@ -59,10 +84,13 @@ div:hover .movieinfo {
     font-family: Georgia, serif, Times;
     text-align: center;
     padding-bottom: 15px;
+    margin: 0px;
 }
 
 .movieinfo p {
-    padding-bottom: 15px;
+    margin: 0px;
+    padding: 0px;
+    color: white;
 }
 
 .movieinfo a {
@@ -73,9 +101,13 @@ div:hover .movieinfo {
     display: block;
     width: 80px;
     text-align: center;
-    margin: 0 auto;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    position: absolute;
+    bottom: -20px;
+    margin: auto;
+    left: 0;
+    right: 0;
 }
 
 .movieinfo a:hover, .movieinfo a:focus {

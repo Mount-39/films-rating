@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var dataStorage_service_1 = require("../../services/dataStorage.service");
 var Favorite = (function () {
-    function Favorite() {
+    function Favorite(store) {
+        this.store = store;
     }
+    Favorite.prototype.favorite = function (movie) {
+        this.store.favorites = movie;
+    };
     Favorite = __decorate([
         core_1.Component({
             selector: 'favorite',
-            template: "\n<div>\n    <h1>Favorite here</h1>\n    <poster></poster>\n</div>\n"
+            styleUrls: ['app/pages/favorite/favorite.css'],
+            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    <div class=\"favorite\">\n        <poster *ngFor=\"let film of store.favorites | async\" [movie]=\"film\" (click)=\"favorite(film)\"></poster>\n    </div>\n</div>\n"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Favorite);
     return Favorite;
 }());
