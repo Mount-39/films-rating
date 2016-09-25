@@ -14,7 +14,7 @@ export class UrlBuilderService {
     }
 
     public DIRECTOR (director:string):Observable<any> {
-                this.backend.get(URLs.DIRECTOR(director))
+       return this.backend.get(URLs.DIRECTOR(director))
     }
 
     public TRAILERS (idIMDB:string):Observable<any> {

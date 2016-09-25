@@ -19,7 +19,7 @@ var UrlBuilderService = (function () {
         return this.backend.get(URLs_1.URLs.TOP20);
     };
     UrlBuilderService.prototype.DIRECTOR = function (director) {
-        this.backend.get(URLs_1.URLs.DIRECTOR(director));
+        return this.backend.get(URLs_1.URLs.DIRECTOR(director));
     };
     UrlBuilderService.prototype.TRAILERS = function (idIMDB) {
         return this.backend.get(URLs_1.URLs.TRAILERS(idIMDB));

@@ -55,13 +55,13 @@ export class DataStorage {
             .flatMap(
                 (film:MoviesModel) =>
                     Observable.forkJoin([
-                        // this.loadDirector(film.directors),
+                        this.loadDirector(film.directors),
                         this.loadTrailers(film.idIMDB)
                     ]).map((data:any) => {
+                        if(!data[1]) console.log('BANG');
                         // let {data:{actor}} = data[0]
-                        // let {data:{trailer}} = data[0]
+                        // let {data:{trailer}} = data[1];
                         console.log("INSIDE ", data);
-                        // film.trailers = trailer;
                         return film;
                     })
             )
@@ -71,7 +71,7 @@ export class DataStorage {
                     this._films.next(List(this._films.getValue().push(res)))
                 },
                 (err:any) => console.error(err),
-                (complete:any) => this._isLoading.next(false)
+                () => this._isLoading.next(false)
             )
     }
 

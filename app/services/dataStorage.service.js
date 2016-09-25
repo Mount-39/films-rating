@@ -62,20 +62,21 @@ var DataStorage = (function () {
         Rx_1.Observable.from(data)
             .flatMap(function (film) {
             return Rx_1.Observable.forkJoin([
-                // this.loadDirector(film.directors),
+                _this.loadDirector(film.directors),
                 _this.loadTrailers(film.idIMDB)
             ]).map(function (data) {
+                if (!data[1])
+                    console.log('BANG');
                 // let {data:{actor}} = data[0]
-                // let {data:{trailer}} = data[0]
+                // let {data:{trailer}} = data[1];
                 console.log("INSIDE ", data);
-                // film.trailers = trailer;
                 return film;
             });
         })
             .subscribe(function (res) {
             console.log("RES ", res);
             _this._films.next(immutable_1.List(_this._films.getValue().push(res)));
-        }, function (err) { return console.error(err); }, function (complete) { return _this._isLoading.next(false); });
+        }, function (err) { return console.error(err); }, function () { return _this._isLoading.next(false); });
     };
     DataStorage.prototype.loadDirector = function (directors) {
         var _this = this;
