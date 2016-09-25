@@ -16,9 +16,17 @@ var urlBuilder_service_1 = require("./urlBuilder.service");
 var DataStorage = (function () {
     function DataStorage(request) {
         this.request = request;
+        this._isLoading = new Rx_1.BehaviorSubject(true);
         this._films = new Rx_1.BehaviorSubject(immutable_1.List([]));
         this._favorites = new Rx_1.BehaviorSubject(immutable_1.List([]));
     }
+    Object.defineProperty(DataStorage.prototype, "isLoading", {
+        get: function () {
+            return this._isLoading.asObservable();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(DataStorage.prototype, "films", {
         get: function () {
             return this._films.asObservable();
@@ -30,22 +38,53 @@ var DataStorage = (function () {
         get: function () {
             return this._favorites.asObservable();
         },
-        set: function (index) {
-            var index = this._favorites.getValue().find(function (i) { return i === index; });
+        set: function (id) {
+            var index = this._favorites.getValue().indexOf(id);
             index != -1 ?
                 this._favorites.next(immutable_1.List(this._favorites.getValue().delete(index))) :
-                this._favorites.next(immutable_1.List((this._favorites.getValue().concat(index))));
+                this._favorites.next(immutable_1.List((this._favorites.getValue().push(id))));
         },
         enumerable: true,
         configurable: true
     });
     DataStorage.prototype.loadFilms = function () {
         var _this = this;
+        this._isLoading.next(true);
         this.request.TOP20()
             .subscribe(function (data) {
             var movies = data.data.movies, films = _this.assignData(movies);
-            _this._films.next(immutable_1.List(films));
+            _this.loadAdditionalData(films);
+            // this._films.next(List(films));
         }, function (err) { return console.log(err); });
+    };
+    DataStorage.prototype.loadAdditionalData = function (data) {
+        var _this = this;
+        Rx_1.Observable.from(data)
+            .flatMap(function (film) {
+            return Rx_1.Observable.forkJoin([
+                // this.loadDirector(film.directors),
+                _this.loadTrailers(film.idIMDB)
+            ]).map(function (data) {
+                // let {data:{actor}} = data[0]
+                // let {data:{trailer}} = data[0]
+                console.log("INSIDE ", data);
+                // film.trailers = trailer;
+                return film;
+            });
+        })
+            .subscribe(function (res) {
+            console.log("RES ", res);
+            _this._films.next(immutable_1.List(_this._films.getValue().push(res)));
+        }, function (err) { return console.error(err); }, function (complete) { return _this._isLoading.next(false); });
+    };
+    DataStorage.prototype.loadDirector = function (directors) {
+        var _this = this;
+        return Rx_1.Observable.forkJoin(directors.map(function (director) {
+            return _this.request.DIRECTOR(director.name);
+        }));
+    };
+    DataStorage.prototype.loadTrailers = function (idIMDB) {
+        return this.request.TRAILERS(idIMDB);
     };
     DataStorage.prototype.assignData = function (data) {
         return data.map(function (film) {

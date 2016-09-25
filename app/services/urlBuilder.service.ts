@@ -13,4 +13,12 @@ export class UrlBuilderService {
        return this.backend.get(URLs.TOP20);
     }
 
+    public DIRECTOR (director:string):Observable<any> {
+                this.backend.get(URLs.DIRECTOR(director))
+    }
+
+    public TRAILERS (idIMDB:string):Observable<any> {
+       return this.backend.get(URLs.TRAILERS(idIMDB));
+    }
+
 }

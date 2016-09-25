@@ -18,6 +18,12 @@ var UrlBuilderService = (function () {
     UrlBuilderService.prototype.TOP20 = function () {
         return this.backend.get(URLs_1.URLs.TOP20);
     };
+    UrlBuilderService.prototype.DIRECTOR = function (director) {
+        this.backend.get(URLs_1.URLs.DIRECTOR(director));
+    };
+    UrlBuilderService.prototype.TRAILERS = function (idIMDB) {
+        return this.backend.get(URLs_1.URLs.TRAILERS(idIMDB));
+    };
     UrlBuilderService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [backend_service_1.BackendService])

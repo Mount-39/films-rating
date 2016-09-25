@@ -1,26 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStorage} from "../../services/dataStorage.service";
+import {List} from 'immutable';
 import {MoviesModel} from "../../models/movies.model";
 
 @Component({
     selector: 'top-20',
-    styleUrls: ['app/pages/top20/top20.css'],
     template: `
 <div>
-    <div class="posters animated zoomIn">
-        <poster *ngFor="let film of films" [movie]="film" (addFavorite)="favorite($event)"></poster>
+    <spinner *ngIf="films.size === 0"></spinner>
+    
+    <div class="center posters animated zoomIn">
+        <poster *ngFor="let film of films" [isActive]="favorites.includes(film.idIMDB)" 
+        [movie]="film" (addFavorite)="favorite($event)"></poster>
     </div>
 </div>
 `
 })
-export class Top20 implements OnInit{
-    private films:any;
-    private subscriber:any;
+export class Top20 implements OnInit {
+    private films: List<MoviesModel>;
+    private favorites: string[];
+    private filmsSubscriber: any;
+    private favoriteSubscriber: any;
 
-    constructor(private store:DataStorage) {
-         this.subscriber = store.films.subscribe((films:any) => {
-            console.log("HEY",films);
+    constructor(private store: DataStorage) {
+        this.filmsSubscriber = store.films.subscribe((films: List<MoviesModel>) => {
             this.films = films;
+        });
+
+        this.favoriteSubscriber = store.favorites.subscribe((ids: string[]) => {
+            this.favorites = ids;
         });
     }
 
@@ -29,12 +37,13 @@ export class Top20 implements OnInit{
             this.store.loadFilms()
     }
 
-    ngOnDestroy(){
-        this.subscriber.unsubscribe();
+    ngOnDestroy() {
+        this.filmsSubscriber.unsubscribe();
+        this.favoriteSubscriber.unsubscribe();
     }
 
-    private favorite(movie:MoviesModel):void {
-        this.store.favorites = movie;
+    private favorite(id: string): void {
+        this.store.favorites = id;
     }
 
 }

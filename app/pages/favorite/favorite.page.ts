@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {DataStorage} from "../../services/dataStorage.service";
-import {MoviesModel} from "../../models/movies.model";
 
 @Component({
     selector: 'favorite',
@@ -8,16 +7,24 @@ import {MoviesModel} from "../../models/movies.model";
     template: `
 <div>
     <h1>Favorite movies:</h1>
-    <div class="favorite">
-        <poster *ngFor="let film of store.favorites | async" [movie]="film" (click)="favorite(film)"></poster>
+    
+    <div class="center posters  animated fadeIn">
+        <poster *ngFor="let film of store.films | async | favorite: favorites" 
+        [isActive]="favorites.includes(film.idIMDB)" [movie]="film" (addFavorite)="favorite($event)"></poster>
     </div>
 </div>
 `
 })
 export class Favorite {
-    constructor(private store:DataStorage) { }
+    private favorites:string[];
 
-    private favorite(movie:MoviesModel):void {
-        this.store.favorites = movie;
+    constructor(private store:DataStorage) {
+        store.favorites.subscribe(
+            (ids:string[]) => this.favorites = ids
+        )
+    }
+
+    private favorite(id:string):void {
+        this.store.favorites = id;
     }
 }

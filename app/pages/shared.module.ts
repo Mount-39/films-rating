@@ -12,12 +12,14 @@ import {UrlBuilderService} from "../services/urlBuilder.service";
 import {BackendService} from "../services/backend.service";
 import {ErrorHandler} from "../services/errorHandler";
 import {DataStorage} from "../services/dataStorage.service";
+import {FavoritesPipe} from "../pipes/favorites.pipe";
+import {Spinner} from "../components/dummy/spinner/spinner";
 
 
 @NgModule({
     imports:      [ CommonModule, FormsModule, HttpModule, JsonpModule ],
-    declarations: [ Btn, Top20, Favorite, ByDecade, Poster ],
-    exports:      [ CommonModule, FormsModule, Btn, Top20, Favorite, ByDecade, Poster ]
+    declarations: [ FavoritesPipe, Btn, Top20, Favorite, ByDecade, Poster, Spinner ],
+    exports:      [ FavoritesPipe, CommonModule, FormsModule, Btn, Top20, Favorite, ByDecade, Poster, Spinner ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

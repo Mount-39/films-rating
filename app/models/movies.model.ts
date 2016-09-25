@@ -9,6 +9,7 @@ export class MoviesModel{
         public urlPoster: string = "",
         public idIMDB: string = "",
         public rating: string = "",
-        public ranking: number = null
+        public ranking: number = null,
+        public trailers: Array<any> = []
     ){ }
 }

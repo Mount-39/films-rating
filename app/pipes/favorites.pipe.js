@@ -9,25 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dataStorage_service_1 = require("../../services/dataStorage.service");
-var Favorite = (function () {
-    function Favorite(store) {
-        var _this = this;
+var dataStorage_service_1 = require("../services/dataStorage.service");
+var FavoritesPipe = (function () {
+    function FavoritesPipe(store) {
         this.store = store;
-        store.favorites.subscribe(function (ids) { return _this.favorites = ids; });
     }
-    Favorite.prototype.favorite = function (id) {
-        this.store.favorites = id;
+    FavoritesPipe.prototype.transform = function (films, args) {
+        return films.filter(function (film) {
+            return args.includes(film.idIMDB);
+        });
     };
-    Favorite = __decorate([
-        core_1.Component({
-            selector: 'favorite',
-            styleUrls: ['app/pages/favorite/favorite.css'],
-            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    \n    <div class=\"center posters  animated fadeIn\">\n        <poster *ngFor=\"let film of store.films | async | favorite: favorites\" \n        [isActive]=\"favorites.includes(film.idIMDB)\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
+    FavoritesPipe = __decorate([
+        core_1.Pipe({
+            name: "favorite"
         }), 
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
-    ], Favorite);
-    return Favorite;
+    ], FavoritesPipe);
+    return FavoritesPipe;
 }());
-exports.Favorite = Favorite;
-//# sourceMappingURL=favorite.page.js.map
+exports.FavoritesPipe = FavoritesPipe;
+//# sourceMappingURL=favorites.pipe.js.map

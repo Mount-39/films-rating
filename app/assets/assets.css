@@ -8,3 +8,19 @@ button:focus { outline: none; }
 menu {
     padding-top: 4%;
 }
+
+.center {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.posters {
+width: 100%;
+display:inline-flex;
+float: left;
+}
+

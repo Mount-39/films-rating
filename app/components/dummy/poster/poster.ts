@@ -8,7 +8,7 @@ import {MoviesModel} from "../../../models/movies.model";
 <div>
     <img [src]="movie?.urlPoster || 'app/assets/img/poster.jpg'" [alt]="movie?.title"/>
     <div class="movieinfo">
-        <span class="favorite" [class.active]="false" (click)="favorite(movie)"></span>
+        <span class="favorite" [class.active]="isActive" (click)="favorite(movie.idIMDB)"></span>
         <h3>{{movie?.title}}</h3>
         <p>year: {{movie?.year}}</p>
         <p>rating: {{movie?.rating}}</p>
@@ -24,7 +24,6 @@ import {MoviesModel} from "../../../models/movies.model";
             <span *ngFor="let director of movie?.directors">
             {{director.name}}</span>
         </p>
-        <!--<p>With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony...</p>-->
         <a title="movie?.title" >More info</a>
     </div>
 </div>
@@ -32,10 +31,11 @@ import {MoviesModel} from "../../../models/movies.model";
 })
 export class Poster{
     @Input() movie:MoviesModel;
+    @Input() isActive:boolean;
     @Output() addFavorite: EventEmitter<any> = new EventEmitter();
 
-    private favorite(movie:MoviesModel):void {
-        this.addFavorite.emit(movie);
+    private favorite(id:MoviesModel):void {
+        this.addFavorite.emit(id);
     }
 }
 

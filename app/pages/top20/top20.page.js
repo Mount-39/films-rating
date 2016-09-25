@@ -14,9 +14,11 @@ var Top20 = (function () {
     function Top20(store) {
         var _this = this;
         this.store = store;
-        this.subscriber = store.films.subscribe(function (films) {
-            console.log("HEY", films);
+        this.filmsSubscriber = store.films.subscribe(function (films) {
             _this.films = films;
+        });
+        this.favoriteSubscriber = store.favorites.subscribe(function (ids) {
+            _this.favorites = ids;
         });
     }
     Top20.prototype.ngOnInit = function () {
@@ -24,16 +26,16 @@ var Top20 = (function () {
             this.store.loadFilms();
     };
     Top20.prototype.ngOnDestroy = function () {
-        this.subscriber.unsubscribe();
+        this.filmsSubscriber.unsubscribe();
+        this.favoriteSubscriber.unsubscribe();
     };
-    Top20.prototype.favorite = function (movie) {
-        this.store.favorites = movie;
+    Top20.prototype.favorite = function (id) {
+        this.store.favorites = id;
     };
     Top20 = __decorate([
         core_1.Component({
             selector: 'top-20',
-            styleUrls: ['app/pages/top20/top20.css'],
-            template: "\n<div>\n    <div class=\"posters animated zoomIn\">\n        <poster *ngFor=\"let film of films\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    \n    <div class=\"center posters animated zoomIn\">\n        <poster *ngFor=\"let film of films\" [isActive]=\"favorites.includes(film.idIMDB)\" \n        [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Top20);

@@ -1,6 +1,6 @@
 "use strict";
 var MoviesModel = (function () {
-    function MoviesModel(title, year, releaseDate, directors, countries, genres, urlPoster, idIMDB, rating, ranking) {
+    function MoviesModel(title, year, releaseDate, directors, countries, genres, urlPoster, idIMDB, rating, ranking, trailers) {
         if (title === void 0) { title = ""; }
         if (year === void 0) { year = null; }
         if (releaseDate === void 0) { releaseDate = null; }
@@ -11,6 +11,7 @@ var MoviesModel = (function () {
         if (idIMDB === void 0) { idIMDB = ""; }
         if (rating === void 0) { rating = ""; }
         if (ranking === void 0) { ranking = null; }
+        if (trailers === void 0) { trailers = []; }
         this.title = title;
         this.year = year;
         this.releaseDate = releaseDate;
@@ -21,6 +22,7 @@ var MoviesModel = (function () {
         this.idIMDB = idIMDB;
         this.rating = rating;
         this.ranking = ranking;
+        this.trailers = trailers;
     }
     return MoviesModel;
 }());

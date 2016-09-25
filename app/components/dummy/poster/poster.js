@@ -14,13 +14,17 @@ var Poster = (function () {
     function Poster() {
         this.addFavorite = new core_1.EventEmitter();
     }
-    Poster.prototype.favorite = function (movie) {
-        this.addFavorite.emit(movie);
+    Poster.prototype.favorite = function (id) {
+        this.addFavorite.emit(id);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', movies_model_1.MoviesModel)
     ], Poster.prototype, "movie", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], Poster.prototype, "isActive", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -29,7 +33,7 @@ var Poster = (function () {
         core_1.Component({
             selector: 'poster',
             styleUrls: ['app/components/dummy/poster/poster.css'],
-            template: "\n<div>\n    <img [src]=\"movie?.urlPoster || 'app/assets/img/poster.jpg'\" [alt]=\"movie?.title\"/>\n    <div class=\"movieinfo\">\n        <span class=\"favorite\" [class.active]=\"false\" (click)=\"favorite(movie)\"></span>\n        <h3>{{movie?.title}}</h3>\n        <p>year: {{movie?.year}}</p>\n        <p>rating: {{movie?.rating}}</p>\n        <p>genre: \n            <span *ngFor=\"let genre of movie?.genres\">\n            {{genre}}</span>\n        </p>\n         <p>country: \n            <span *ngFor=\"let country of movie?.countries\">\n            {{country}}</span>\n        </p>\n         <p>director: \n            <span *ngFor=\"let director of movie?.directors\">\n            {{director.name}}</span>\n        </p>\n        <!--<p>With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony...</p>-->\n        <a title=\"movie?.title\" >More info</a>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <img [src]=\"movie?.urlPoster || 'app/assets/img/poster.jpg'\" [alt]=\"movie?.title\"/>\n    <div class=\"movieinfo\">\n        <span class=\"favorite\" [class.active]=\"isActive\" (click)=\"favorite(movie.idIMDB)\"></span>\n        <h3>{{movie?.title}}</h3>\n        <p>year: {{movie?.year}}</p>\n        <p>rating: {{movie?.rating}}</p>\n        <p>genre: \n            <span *ngFor=\"let genre of movie?.genres\">\n            {{genre}}</span>\n        </p>\n         <p>country: \n            <span *ngFor=\"let country of movie?.countries\">\n            {{country}}</span>\n        </p>\n         <p>director: \n            <span *ngFor=\"let director of movie?.directors\">\n            {{director.name}}</span>\n        </p>\n        <a title=\"movie?.title\" >More info</a>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [])
     ], Poster);

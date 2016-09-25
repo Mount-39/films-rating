@@ -46,7 +46,7 @@ div:hover img {
     mask-image: url(app/assets/img/star.svg);
 }
 
-.favorite .active {
+.favorite.active {
     background-color: #ffe96a;
 }
 

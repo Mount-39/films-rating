@@ -21,6 +21,8 @@ var urlBuilder_service_1 = require("../services/urlBuilder.service");
 var backend_service_1 = require("../services/backend.service");
 var errorHandler_1 = require("../services/errorHandler");
 var dataStorage_service_1 = require("../services/dataStorage.service");
+var favorites_pipe_1 = require("../pipes/favorites.pipe");
+var spinner_1 = require("../components/dummy/spinner/spinner");
 var SharedModule = (function () {
     function SharedModule() {
     }
@@ -33,8 +35,8 @@ var SharedModule = (function () {
     SharedModule = __decorate([
         core_1.NgModule({
             imports: [common_1.CommonModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule],
-            declarations: [button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster],
-            exports: [common_1.CommonModule, forms_1.FormsModule, button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster]
+            declarations: [favorites_pipe_1.FavoritesPipe, button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster, spinner_1.Spinner],
+            exports: [favorites_pipe_1.FavoritesPipe, common_1.CommonModule, forms_1.FormsModule, button_1.Btn, top20_page_1.Top20, favorite_page_1.Favorite, byDecade_page_1.ByDecade, poster_1.Poster, spinner_1.Spinner]
         }), 
         __metadata('design:paramtypes', [])
     ], SharedModule);
