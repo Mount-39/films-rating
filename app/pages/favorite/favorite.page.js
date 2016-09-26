@@ -18,15 +18,15 @@ var dataStorage_service_1 = require("../../services/dataStorage.service");
 var filmsLoading_1 = require("../filmsLoading");
 var Favorite = (function (_super) {
     __extends(Favorite, _super);
-    function Favorite(store) {
-        _super.call(this, store);
-        this.store = store;
+    function Favorite(dataStore) {
+        _super.call(this, dataStore);
+        this.dataStore = dataStore;
     }
     Favorite = __decorate([
         core_1.Component({
             selector: 'favorite',
             styleUrls: ['app/pages/favorite/favorite.css'],
-            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    \n    <div class=\"center posters  animated fadeIn\">\n        <poster *ngFor=\"let film of store.films | async | favorite: favorites\" \n        [isActive]=\"favorites.includes(film.idIMDB)\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    <div class=\"center posters  animated fadeIn\">\n        <poster *ngFor=\"let film of store.films | async | favorite: favorites\" \n        [isActive]=\"favorites.includes(film.idIMDB)\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Favorite);

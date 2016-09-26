@@ -18,9 +18,9 @@ var dataStorage_service_1 = require("../../services/dataStorage.service");
 var filmsLoading_1 = require("../filmsLoading");
 var Top20 = (function (_super) {
     __extends(Top20, _super);
-    function Top20(store) {
-        _super.call(this, store);
-        this.store = store;
+    function Top20(dataStore) {
+        _super.call(this, dataStore);
+        this.dataStore = dataStore;
     }
     Top20 = __decorate([
         core_1.Component({

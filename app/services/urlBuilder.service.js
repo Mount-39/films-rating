@@ -18,6 +18,9 @@ var UrlBuilderService = (function () {
     UrlBuilderService.prototype.TOP20 = function () {
         return this.backend.get(URLs_1.URLs.TOP20);
     };
+    UrlBuilderService.prototype.MOCKS_TOP20 = function () {
+        return this.backend.getMOCKS(URLs_1.URLs.MOCKS_TOP20);
+    };
     UrlBuilderService.prototype.DIRECTOR = function (director) {
         return this.backend.get(URLs_1.URLs.DIRECTOR(director));
     };

@@ -26,6 +26,11 @@ var BackendService = (function () {
             .map(function (res) { return res.json(); })
             .flatMap(function (data) { return data.error ? _this.error.handleError(data) : Observable_1.Observable.of(data); });
     };
+    BackendService.prototype.getMOCKS = function (url) {
+        return this.http.get(url)
+            .cache()
+            .map(function (res) { return res.json(); });
+    };
     BackendService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http, errorHandler_1.ErrorHandler])

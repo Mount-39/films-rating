@@ -17,6 +17,12 @@ export class BackendService {
         return this.http.get(api.URL)
             .cache()
             .map((res:Response) => <Object[]>res.json())
-            .flatMap((data:any) => data.error ? this.error.handleError(data) : Observable.of(data));
+            .flatMap((data:any) => data.error ? this.error.handleError(data) : Observable.of(data))
+    }
+
+    public getMOCKS(url:string): Observable<{}> {
+        return this.http.get(url)
+            .cache()
+            .map((res:Response) => <Object[]>res.json())
     }
 }

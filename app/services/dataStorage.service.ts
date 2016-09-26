@@ -15,7 +15,7 @@ export class DataStorage {
     constructor(private request: UrlBuilderService) {
         const local = localStorage.getItem(FAVORITES);
         if(local) {
-            this._favorites.next(List(local.split(',')));
+            this._favorites.next(List(<List<string>>local.split(',')));
         }
 
         this._favorites.subscribe((updated:List<string>) => this.favoritsLocalstorage(updated.toArray()))
@@ -46,11 +46,18 @@ export class DataStorage {
         this._isLoading.next(true);
 
         this.request.TOP20()
+            .flatMap((data:any) =>
+                Observable.if(
+                    () => data ? true : false,
+                    this.request.MOCKS_TOP20()
+                )
+            )
             .subscribe(
                 (data: any) => {
                     let
                         {data:{movies}} = data,
                         films = this.assignData(movies);
+
                     this._films.next(List(films));
                     this.loadAdditionalData(films);
                 },
@@ -106,5 +113,4 @@ export class DataStorage {
     private favoritsLocalstorage(items: string[]): void {
         localStorage.setItem(FAVORITES, items.toString());
     }
-
 }

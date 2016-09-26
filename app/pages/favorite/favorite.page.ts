@@ -8,7 +8,7 @@ import {FilmsLoading} from "../filmsLoading";
     template: `
 <div>
     <h1>Favorite movies:</h1>
-    
+    <spinner *ngIf="films.size === 0"></spinner>
     <div class="center posters  animated fadeIn">
         <poster *ngFor="let film of store.films | async | favorite: favorites" 
         [isActive]="favorites.includes(film.idIMDB)" [movie]="film" (addFavorite)="favorite($event)"></poster>
@@ -17,7 +17,7 @@ import {FilmsLoading} from "../filmsLoading";
 `
 })
 export class Favorite extends FilmsLoading {
-    constructor(private store:DataStorage){
-        super(store);
+    constructor(private dataStore:DataStorage){
+        super(dataStore);
     }
 }

@@ -58,6 +58,9 @@ var DataStorage = (function () {
         var _this = this;
         this._isLoading.next(true);
         this.request.TOP20()
+            .flatMap(function (data) {
+            return Rx_1.Observable.if(function () { return data ? true : false; }, _this.request.MOCKS_TOP20());
+        })
             .subscribe(function (data) {
             var movies = data.data.movies, films = _this.assignData(movies);
             _this._films.next(immutable_1.List(films));

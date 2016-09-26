@@ -18,7 +18,7 @@ import {FilmsLoading} from "../filmsLoading";
 `
 })
 export class Top20 extends FilmsLoading{
-    constructor(private store:DataStorage){
-        super(store);
+    constructor(private dataStore:DataStorage){
+        super(dataStore);
     }
 }

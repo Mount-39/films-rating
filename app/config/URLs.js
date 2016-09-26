@@ -9,6 +9,13 @@ var URLs = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(URLs, "MOCKS_TOP20", {
+        get: function () {
+            return 'app/config/data.json';
+        },
+        enumerable: true,
+        configurable: true
+    });
     URLs.DIRECTOR = function (name) {
         return "imdb/idIMDB?name=" + name + "&language=en-us&filmography=0&exactFilter=0&limit=1&bornDied=0&starSign=0&uniqueName=0&actorActress=0&actorTrivia=0&actorPhotos=0&actorVideos=0&salary=0&spouses=0&tradeMark=0&personalQuotes=0&starMeter=0&fullSize=0";
     };
