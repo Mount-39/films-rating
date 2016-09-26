@@ -32,7 +32,7 @@ div:hover img {
 
 .favorite {
     position: absolute;
-    top: -36px;
+    top: -56px;
     left: -26px;
     display: block;
     width: 80px;
@@ -77,6 +77,10 @@ div:hover .movieinfo {
     margin: -175px 0 0 30px;
 }
 
+.movieinfo div {
+    color: white;
+    margin: 0;
+}
 
 .movieinfo h3 {
     color: #fffaef;
@@ -94,6 +98,10 @@ div:hover .movieinfo {
 }
 
 .movieinfo a {
+    color: antiquewhite;
+}
+
+.movieinfo .trailers {
     background-color: #561d19;
     padding: 5px 10px;
     color: #eee;
@@ -110,7 +118,7 @@ div:hover .movieinfo {
     right: 0;
 }
 
-.movieinfo a:hover, .movieinfo a:focus {
+.movieinfo .trailers:hover, .movieinfo .trailers:focus {
     background-color: #6a191f;
     color: #fff;
 }

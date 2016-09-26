@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {DataStorage} from "../../services/dataStorage.service";
+import {FilmsLoading} from "../filmsLoading";
 
 @Component({
     selector: 'favorite',
@@ -15,16 +16,8 @@ import {DataStorage} from "../../services/dataStorage.service";
 </div>
 `
 })
-export class Favorite {
-    private favorites:string[];
-
-    constructor(private store:DataStorage) {
-        store.favorites.subscribe(
-            (ids:string[]) => this.favorites = ids
-        )
-    }
-
-    private favorite(id:string):void {
-        this.store.favorites = id;
+export class Favorite extends FilmsLoading {
+    constructor(private store:DataStorage){
+        super(store);
     }
 }

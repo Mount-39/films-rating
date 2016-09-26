@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var Observable_1 = require('rxjs/Observable');
 var API_1 = require("../config/API");
 var errorHandler_1 = require("./errorHandler");
 var BackendService = (function () {
@@ -23,7 +24,7 @@ var BackendService = (function () {
         return this.http.get(api.URL)
             .cache()
             .map(function (res) { return res.json(); })
-            .map(function (data) { return data.error ? _this.error.handleError(data) : data; });
+            .flatMap(function (data) { return data.error ? _this.error.handleError(data) : Observable_1.Observable.of(data); });
     };
     BackendService = __decorate([
         core_1.Injectable(), 

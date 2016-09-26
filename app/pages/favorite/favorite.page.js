@@ -1,4 +1,9 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,15 +15,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dataStorage_service_1 = require("../../services/dataStorage.service");
-var Favorite = (function () {
+var filmsLoading_1 = require("../filmsLoading");
+var Favorite = (function (_super) {
+    __extends(Favorite, _super);
     function Favorite(store) {
-        var _this = this;
+        _super.call(this, store);
         this.store = store;
-        store.favorites.subscribe(function (ids) { return _this.favorites = ids; });
     }
-    Favorite.prototype.favorite = function (id) {
-        this.store.favorites = id;
-    };
     Favorite = __decorate([
         core_1.Component({
             selector: 'favorite',
@@ -28,6 +31,6 @@ var Favorite = (function () {
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Favorite);
     return Favorite;
-}());
+}(filmsLoading_1.FilmsLoading));
 exports.Favorite = Favorite;
 //# sourceMappingURL=favorite.page.js.map

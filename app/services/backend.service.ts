@@ -17,6 +17,6 @@ export class BackendService {
         return this.http.get(api.URL)
             .cache()
             .map((res:Response) => <Object[]>res.json())
-            .map((data:any) => data.error ? this.error.handleError(data) : data);
+            .flatMap((data:any) => data.error ? this.error.handleError(data) : Observable.of(data));
     }
 }

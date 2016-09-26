@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataStorage} from "../../services/dataStorage.service";
 import {List} from 'immutable';
 import {MoviesModel} from "../../models/movies.model";
+import {FilmsLoading} from "../filmsLoading";
 
 @Component({
     selector: 'top-20',
@@ -16,34 +17,8 @@ import {MoviesModel} from "../../models/movies.model";
 </div>
 `
 })
-export class Top20 implements OnInit {
-    private films: List<MoviesModel>;
-    private favorites: string[];
-    private filmsSubscriber: any;
-    private favoriteSubscriber: any;
-
-    constructor(private store: DataStorage) {
-        this.filmsSubscriber = store.films.subscribe((films: List<MoviesModel>) => {
-            this.films = films;
-        });
-
-        this.favoriteSubscriber = store.favorites.subscribe((ids: string[]) => {
-            this.favorites = ids;
-        });
+export class Top20 extends FilmsLoading{
+    constructor(private store:DataStorage){
+        super(store);
     }
-
-    ngOnInit() {
-        if (this.films.size === 0)
-            this.store.loadFilms()
-    }
-
-    ngOnDestroy() {
-        this.filmsSubscriber.unsubscribe();
-        this.favoriteSubscriber.unsubscribe();
-    }
-
-    private favorite(id: string): void {
-        this.store.favorites = id;
-    }
-
 }

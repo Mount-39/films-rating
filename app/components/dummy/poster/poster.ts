@@ -20,11 +20,11 @@ import {MoviesModel} from "../../../models/movies.model";
             <span *ngFor="let country of movie?.countries">
             {{country}}</span>
         </p>
-         <p>director: 
-            <span *ngFor="let director of movie?.directors">
-            {{director.name}}</span>
-        </p>
-        <a title="movie?.title" >More info</a>
+         <div>director: 
+            <a *ngFor="let director of movie?.directors" [href]="'http://www.imdb.com/name/' + director.id">
+            {{director.name}}</a>
+         </div>
+        <a class="trailers" *ngIf="movie?.trailers.length">Trailers</a>
     </div>
 </div>
 `

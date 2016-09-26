@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Rx";
 @Injectable()
 export class ErrorHandler {
 
-    public handleError(serverResponse: any):Error {
+    public handleError(serverResponse: any):Observable<{}> {
         let
             errMsg = serverResponse.error ? serverResponse.error : serverResponse,
             returnedMessage:string;
@@ -15,6 +15,8 @@ export class ErrorHandler {
         else
             returnedMessage = `Error : ${errMsg}`;
 
-        return new Error(returnedMessage);
+        console.error(returnedMessage);
+
+        return Observable.of({data:{}});
     }
 }
