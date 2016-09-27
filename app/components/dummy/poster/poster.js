@@ -13,9 +13,13 @@ var movies_model_1 = require("../../../models/movies.model");
 var Poster = (function () {
     function Poster() {
         this.addFavorite = new core_1.EventEmitter();
+        this.trailers = new core_1.EventEmitter();
     }
     Poster.prototype.favorite = function (id) {
         this.addFavorite.emit(id);
+    };
+    Poster.prototype.trailersClicked = function (trailers) {
+        this.trailers.emit(trailers);
     };
     __decorate([
         core_1.Input(), 
@@ -29,11 +33,15 @@ var Poster = (function () {
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], Poster.prototype, "addFavorite", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], Poster.prototype, "trailers", void 0);
     Poster = __decorate([
         core_1.Component({
             selector: 'poster',
             styleUrls: ['app/components/dummy/poster/poster.css'],
-            template: "\n<div>\n    <img [src]=\"movie?.urlPoster || 'app/assets/img/poster.jpg'\" [alt]=\"movie?.title\"/>\n    <div class=\"movieinfo\">\n        <span class=\"favorite\" [class.active]=\"isActive\" (click)=\"favorite(movie.idIMDB)\"></span>\n        <h3>{{movie?.title}}</h3>\n        <p>year: {{movie?.year}}</p>\n        <p>rating: {{movie?.rating}}</p>\n        <p>genre: \n            <span *ngFor=\"let genre of movie?.genres\">\n            {{genre}}</span>\n        </p>\n         <p>country: \n            <span *ngFor=\"let country of movie?.countries\">\n            {{country}}</span>\n        </p>\n         <div>director: \n            <a *ngFor=\"let director of movie?.directors\" [href]=\"'http://www.imdb.com/name/' + director.id\">\n            {{director.name}}</a>\n         </div>\n        <a class=\"trailers\" *ngIf=\"movie?.trailers.length\">Trailers</a>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <img [src]=\"movie?.urlPoster || 'app/assets/img/poster.jpg'\" [alt]=\"movie?.title\"/>\n    <div class=\"movieinfo\">\n        <span class=\"favorite\" [class.active]=\"isActive\" (click)=\"favorite(movie.idIMDB)\"></span>\n        <h3>{{movie?.title}}</h3>\n        <p>year: {{movie?.year}}</p>\n        <p>rating: {{movie?.rating}}</p>\n        <p>genre: \n            <span *ngFor=\"let genre of movie?.genres\">\n            {{genre}}</span>\n        </p>\n         <p>country: \n            <span *ngFor=\"let country of movie?.countries\">\n            {{country}}</span>\n        </p>\n         <div>director: \n            <a *ngFor=\"let director of movie?.directors\" [href]=\"'http://www.imdb.com/name/' + director.id\">\n            {{director.name}}</a>\n         </div>\n        <a class=\"trailers\" *ngIf=\"movie?.trailers.length\" \n        (click)=\"trailersClicked(movie.trailers)\">Trailers</a>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [])
     ], Poster);

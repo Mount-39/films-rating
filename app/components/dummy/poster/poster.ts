@@ -24,7 +24,8 @@ import {MoviesModel} from "../../../models/movies.model";
             <a *ngFor="let director of movie?.directors" [href]="'http://www.imdb.com/name/' + director.id">
             {{director.name}}</a>
          </div>
-        <a class="trailers" *ngIf="movie?.trailers.length">Trailers</a>
+        <a class="trailers" *ngIf="movie?.trailers.length" 
+        (click)="trailersClicked(movie.trailers)">Trailers</a>
     </div>
 </div>
 `
@@ -33,9 +34,14 @@ export class Poster{
     @Input() movie:MoviesModel;
     @Input() isActive:boolean;
     @Output() addFavorite: EventEmitter<any> = new EventEmitter();
+    @Output() trailers: EventEmitter<any> = new EventEmitter();
 
     private favorite(id:MoviesModel):void {
         this.addFavorite.emit(id);
+    }
+
+    private trailersClicked(trailers:any[]):void {
+        this.trailers.emit(trailers);
     }
 }
 
