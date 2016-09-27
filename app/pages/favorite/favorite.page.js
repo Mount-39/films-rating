@@ -26,7 +26,7 @@ var Favorite = (function (_super) {
         core_1.Component({
             selector: 'favorite',
             styleUrls: ['app/pages/favorite/favorite.css'],
-            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    <div class=\"center posters  animated fadeIn\">\n        <poster *ngFor=\"let film of store.films | async | favorite: favorites\" \n        [isActive]=\"favorites.includes(film.idIMDB)\" [movie]=\"film\" (addFavorite)=\"favorite($event)\"></poster>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <h1>Favorite movies:</h1>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    <modal *ngIf=\"!modal\" [trailers]=\"trailers\" (isClose)=\"modal = $event\"></modal>\n    <div class=\"center posters  animated fadeIn\">\n        <poster *ngFor=\"let film of store.films | async | favorite: favorites\" \n        [isActive]=\"favorites.includes(film.idIMDB)\" \n        [movie]=\"film\" (addFavorite)=\"favorite($event)\"\n        (trailers)=\"openModal($event)\"></poster>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Favorite);

@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 @Component({
     selector: 'modal',
     styleUrls: ['app/components/dummy/modal/modal.css'],
     template: `
-<div class="modal" (click)="close()" [hidden]="isClose">
+<div class="modal" (click)="close()">
     <div class="center animated zoomIn">
         <h2>Trailers:</h2>
         <span *ngFor="let trailer of trailers" [innerHTML]="sanitizeHTML(trailer.embed)">
@@ -16,7 +16,7 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 })
 export class Modal {
     @Input() trailers: any[];
-    @Input() isClose: boolean;
+    @Output() isClose: EventEmitter<any> = new EventEmitter();
 
     constructor(private sanitizer: DomSanitizer) {
 
@@ -27,6 +27,6 @@ export class Modal {
     }
 
     private close(): void {
-        this.isClose = true;
+        this.isClose.emit(true);
     }
 }

@@ -21,16 +21,11 @@ var Top20 = (function (_super) {
     function Top20(dataStore) {
         _super.call(this, dataStore);
         this.dataStore = dataStore;
-        this.modal = true;
     }
-    Top20.prototype.openModal = function (trailers) {
-        this.trailers = trailers;
-        this.modal = false;
-    };
     Top20 = __decorate([
         core_1.Component({
             selector: 'top-20',
-            template: "\n<div>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    \n    <modal [isClose]=\"modal\" [trailers]=\"trailers\"></modal>\n    \n    <div class=\"center posters animated zoomIn\">\n        <poster *ngFor=\"let film of films\" [isActive]=\"favorites.includes(film.idIMDB)\" \n        [movie]=\"film\" (addFavorite)=\"favorite($event)\" \n        (trailers)=\"openModal($event)\"></poster>\n    </div>\n</div>\n"
+            template: "\n<div>\n    <spinner *ngIf=\"films.size === 0\"></spinner>\n    \n    <modal *ngIf=\"!modal\" [trailers]=\"trailers\" (isClose)=\"modal = $event\"></modal>\n    \n    <div class=\"center posters animated zoomIn\">\n        <poster *ngFor=\"let film of films\" [isActive]=\"favorites.includes(film.idIMDB)\" \n        [movie]=\"film\" (addFavorite)=\"favorite($event)\" \n        (trailers)=\"openModal($event)\"></poster>\n    </div>\n</div>\n"
         }), 
         __metadata('design:paramtypes', [dataStorage_service_1.DataStorage])
     ], Top20);

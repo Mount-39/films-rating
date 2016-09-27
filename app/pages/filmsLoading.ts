@@ -6,8 +6,11 @@ import {List} from "immutable";
 export class FilmsLoading implements OnInit {
     public films: List<MoviesModel>;
     public favorites: string[];
+    public modal:boolean = true;
+    public trailers:any[];
     private filmsSubscriber: any;
     private favoriteSubscriber: any;
+
 
     constructor(private store: DataStorage) {
         this.filmsSubscriber = store.films.subscribe((films: List<MoviesModel>) => {
@@ -31,5 +34,10 @@ export class FilmsLoading implements OnInit {
 
     public favorite(id: string): void {
         this.store.favorites = id;
+    }
+
+    public openModal(trailers:any[]):void {
+        this.trailers = trailers;
+        this.modal = false;
     }
 }

@@ -3,6 +3,7 @@ var FilmsLoading = (function () {
     function FilmsLoading(store) {
         var _this = this;
         this.store = store;
+        this.modal = true;
         this.filmsSubscriber = store.films.subscribe(function (films) {
             _this.films = films;
         });
@@ -20,6 +21,10 @@ var FilmsLoading = (function () {
     };
     FilmsLoading.prototype.favorite = function (id) {
         this.store.favorites = id;
+    };
+    FilmsLoading.prototype.openModal = function (trailers) {
+        this.trailers = trailers;
+        this.modal = false;
     };
     return FilmsLoading;
 }());

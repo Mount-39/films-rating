@@ -10,7 +10,7 @@ import {FilmsLoading} from "../filmsLoading";
 <div>
     <spinner *ngIf="films.size === 0"></spinner>
     
-    <modal [isClose]="modal" [trailers]="trailers"></modal>
+    <modal *ngIf="!modal" [trailers]="trailers" (isClose)="modal = $event"></modal>
     
     <div class="center posters animated zoomIn">
         <poster *ngFor="let film of films" [isActive]="favorites.includes(film.idIMDB)" 
@@ -21,15 +21,7 @@ import {FilmsLoading} from "../filmsLoading";
 `
 })
 export class Top20 extends FilmsLoading{
-    private modal:boolean = true;
-    private trailers:any[];
-
     constructor(private dataStore:DataStorage){
         super(dataStore);
-    }
-
-    private openModal(trailers:any[]):void {
-        this.trailers = trailers;
-        this.modal = false;
     }
 }
