@@ -3,7 +3,7 @@ import {DataStorage} from "../services/dataStorage.service";
 import {MoviesModel} from "../models/movies.model";
 import {List} from "immutable";
 
-export class FilmsLoading implements OnInit {
+export class FilmsLoading {
     public films: List<MoviesModel>;
     public favorites: string[];
     public modal:boolean = true;
@@ -20,11 +20,6 @@ export class FilmsLoading implements OnInit {
         this.favoriteSubscriber = store.favorites.subscribe((ids: string[]) => {
             this.favorites = ids;
         });
-    }
-
-    ngOnInit() {
-        if (this.films.size === 0)
-            this.store.loadFilms()
     }
 
     ngOnDestroy() {

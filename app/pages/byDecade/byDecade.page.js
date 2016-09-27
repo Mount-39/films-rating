@@ -9,15 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var dataStorage_service_1 = require("../../services/dataStorage.service");
+var chart_service_1 = require("./chart.service");
 var ByDecade = (function () {
-    function ByDecade() {
+    function ByDecade(dataStorage, chart) {
+        this.dataStorage = dataStorage;
+        this.chart = chart;
     }
+    ByDecade.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscriber = this.dataStorage.byDecades.subscribe(function (res) {
+            if (res) {
+                _this.chartData = Object.keys(res).reduce(function (data, key) {
+                    return data = data.concat([{ decade: key, count: res[key] }]);
+                }, []);
+                _this.chart.build(_this.chartData);
+            }
+        });
+    };
+    ByDecade.prototype.ngOnDestroy = function () {
+        this.subscriber.unsubscribe();
+    };
     ByDecade = __decorate([
         core_1.Component({
             selector: 'by-decade',
-            template: "\n<div>\n    <h1>HERE CHART</h1>\n</div>\n"
+            template: "\n<div>\n    <h1>Chart is showing films by decades</h1>\n    <span id=\"chart\"></span>\n</div>\n"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [dataStorage_service_1.DataStorage, chart_service_1.ChartBuilder])
     ], ByDecade);
     return ByDecade;
 }());

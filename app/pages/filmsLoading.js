@@ -11,10 +11,6 @@ var FilmsLoading = (function () {
             _this.favorites = ids;
         });
     }
-    FilmsLoading.prototype.ngOnInit = function () {
-        if (this.films.size === 0)
-            this.store.loadFilms();
-    };
     FilmsLoading.prototype.ngOnDestroy = function () {
         this.filmsSubscriber.unsubscribe();
         this.favoriteSubscriber.unsubscribe();

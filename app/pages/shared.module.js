@@ -16,6 +16,7 @@ var urlBuilder_service_1 = require("../services/urlBuilder.service");
 var backend_service_1 = require("../services/backend.service");
 var errorHandler_1 = require("../services/errorHandler");
 var dataStorage_service_1 = require("../services/dataStorage.service");
+var chart_service_1 = require("./byDecade/chart.service");
 var favorites_pipe_1 = require("../pipes/favorites.pipe");
 var top20_page_1 = require("./top20/top20.page");
 var favorite_page_1 = require("./favorite/favorite.page");
@@ -30,7 +31,7 @@ var SharedModule = (function () {
     SharedModule.forRoot = function () {
         return {
             ngModule: SharedModule,
-            providers: [backend_service_1.BackendService, errorHandler_1.ErrorHandler, urlBuilder_service_1.UrlBuilderService, dataStorage_service_1.DataStorage]
+            providers: [backend_service_1.BackendService, errorHandler_1.ErrorHandler, urlBuilder_service_1.UrlBuilderService, dataStorage_service_1.DataStorage, chart_service_1.ChartBuilder]
         };
     };
     SharedModule = __decorate([

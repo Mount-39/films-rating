@@ -21,15 +21,27 @@ var DataStorage = (function () {
         this._isLoading = new Rx_1.BehaviorSubject(true);
         this._films = new Rx_1.BehaviorSubject(immutable_1.List([]));
         this._favorites = new Rx_1.BehaviorSubject(immutable_1.List([]));
+        this._byDecades = new Rx_1.BehaviorSubject({});
+        //Init load data
+        this.loadFilms();
+        //Check localStorage
         var local = localStorage.getItem(FAVORITES);
         if (local) {
             this._favorites.next(immutable_1.List(local.split(',')));
         }
+        //Subscribe for update localStorage w
         this._favorites.subscribe(function (updated) { return _this.favoritsLocalstorage(updated.toArray()); });
     }
     Object.defineProperty(DataStorage.prototype, "isLoading", {
         get: function () {
             return this._isLoading.asObservable();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataStorage.prototype, "byDecades", {
+        get: function () {
+            return this._byDecades.asObservable();
         },
         enumerable: true,
         configurable: true
@@ -64,8 +76,16 @@ var DataStorage = (function () {
             .subscribe(function (data) {
             var movies = data.data.movies, films = _this.assignData(movies);
             _this._films.next(immutable_1.List(films));
+            _this._byDecades.next(_this.parseByDecades(films));
             _this.loadAdditionalData(films);
         }, function (err) { return console.error(err); });
+    };
+    DataStorage.prototype.parseByDecades = function (data) {
+        return data.reduce(function (byDecades, film) {
+            var decade = film.year.toString().slice(0, -1) + '0x';
+            byDecades[decade] ? byDecades[decade] += 1 : byDecades[decade] = 1;
+            return byDecades;
+        }, {});
     };
     DataStorage.prototype.loadAdditionalData = function (data) {
         var _this = this;

@@ -11,18 +11,28 @@ export class DataStorage {
     private _isLoading: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _films: BehaviorSubject<List<MoviesModel>> = new BehaviorSubject(List([]));
     private _favorites: BehaviorSubject<List<string>> = new BehaviorSubject(List([]));
+    private _byDecades: BehaviorSubject<{}> = new BehaviorSubject({});
 
     constructor(private request: UrlBuilderService) {
+        //Init load data
+        this.loadFilms();
+
+        //Check localStorage
         const local = localStorage.getItem(FAVORITES);
-        if(local) {
+        if (local) {
             this._favorites.next(List(<List<string>>local.split(',')));
         }
 
-        this._favorites.subscribe((updated:List<string>) => this.favoritsLocalstorage(updated.toArray()))
+        //Subscribe for update localStorage w
+        this._favorites.subscribe((updated: List<string>) => this.favoritsLocalstorage(updated.toArray()))
     }
 
     public get isLoading() {
         return this._isLoading.asObservable();
+    }
+
+    public get byDecades() {
+        return this._byDecades.asObservable();
     }
 
     public get films() {
@@ -46,7 +56,7 @@ export class DataStorage {
         this._isLoading.next(true);
 
         this.request.TOP20()
-            .flatMap((data:any) =>
+            .flatMap((data: any) =>
                 Observable.if(
                     () => data ? true : false,
                     this.request.MOCKS_TOP20()
@@ -59,10 +69,19 @@ export class DataStorage {
                         films = this.assignData(movies);
 
                     this._films.next(List(films));
+                    this._byDecades.next(this.parseByDecades(films));
                     this.loadAdditionalData(films);
                 },
                 err => console.error(err)
             )
+    }
+
+    private parseByDecades(data: MoviesModel[]): any {
+        return data.reduce((byDecades: any, film: MoviesModel) => {
+            let decade = film.year.toString().slice(0, -1) + '0x';
+            byDecades[decade] ? byDecades[decade] += 1 : byDecades[decade] = 1;
+            return byDecades;
+        }, {})
     }
 
     private loadAdditionalData(data: MoviesModel[]): void {

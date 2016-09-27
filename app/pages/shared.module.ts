@@ -7,6 +7,7 @@ import {UrlBuilderService} from "../services/urlBuilder.service";
 import {BackendService} from "../services/backend.service";
 import {ErrorHandler} from "../services/errorHandler";
 import {DataStorage} from "../services/dataStorage.service";
+import {ChartBuilder} from "./byDecade/chart.service";
 
 import {FavoritesPipe} from "../pipes/favorites.pipe";
 
@@ -29,7 +30,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ BackendService, ErrorHandler, UrlBuilderService, DataStorage ]
+            providers: [ BackendService, ErrorHandler, UrlBuilderService, DataStorage, ChartBuilder ]
         };
     }
 }
